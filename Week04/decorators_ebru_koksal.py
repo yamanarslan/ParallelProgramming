@@ -12,13 +12,14 @@ def performance(func):
         _, peak = tracemalloc.get_traced_memory()
         tracemalloc.stop()
         
-        performance.counter += 1
-        performance.total_time += (t2 - t1)
-        performance.total_mem += peak
+        wrapper.counter += 1
+        wrapper.total_time += (t2 - t1)
+        wrapper.total_mem += peak
         
         return result
+    
+    wrapper.counter = 0
+    wrapper.total_time = 0
+    wrapper.total_mem = 0
+    
     return wrapper
-
-performance.counter = 0
-performance.total_time = 0
-performance.total_mem = 0
